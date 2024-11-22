@@ -33,6 +33,7 @@ public class Dataset
             byte[][] images = new byte[endIndex - startIndex + 1][];
             double[] labels = new double[endIndex - startIndex + 1];
             int dimensions = numRows * numCols;
+            
             for (int i = 0; i < numImages; i++)
             {
                 var temp1 = brImages.ReadBytes(dimensions);

@@ -119,9 +119,9 @@ void MakePredictions(Dataset dataset, Model model)
 }
 
 var trainingDataset = new Dataset(0, 3999);
-var testingDataset = new Dataset(4000, 10000);
+var testingDataset = new Dataset(8000, 11999);
 
-var model = TrainModel(trainingDataset, 50, 0.01f, 20);
+var model = TrainModel(trainingDataset, 50, 0.01f, 100);
 
 MakePredictions(testingDataset, model);
 
