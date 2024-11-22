@@ -92,6 +92,7 @@ Model TrainModel(Dataset dataset, int l2Size, float learningRate, int epochs)
     // actual training
     for (int epoch = 0; epoch < epochs; epoch++)
     {
+        var startTime = DateTime.Now;
         var (z1, a1, z2, a2) = ForwardProp(model, dataset.images);
         var (dW1, db1, dW2, db2) = BackwardProp(z1, a1, z2, a2, model, dataset);
         model = UpdateParams(model, dW1, db1, dW2, db2, learningRate);
@@ -99,7 +100,8 @@ Model TrainModel(Dataset dataset, int l2Size, float learningRate, int epochs)
         // printin progresss
         var predictions = GetPredictions(a2);
         var numCorrect = GetCorrectPredictions(predictions, dataset.labels);
-        Console.WriteLine($"epoch={epoch+1} correct={numCorrect / (double)dataset.size}");
+        var elapsed = DateTime.Now - startTime;
+        Console.WriteLine($"epoch={(epoch+1).ToString(),-4} correct={(numCorrect / (double)dataset.size):F5} time={elapsed.TotalSeconds:F1}s");
     }
     
     Console.WriteLine("Training finished");
